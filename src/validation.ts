@@ -1,19 +1,18 @@
 import * as http from 'http'
-import {v4 as uuidv4} from 'uuid'
-import { methodManager } from './methodManager';
+import * as uuid from 'uuid'
 
 const checkGET = (url: string): Boolean => {
     if(url === "/api/users" || url === "/api/users/" ) return true;
-    if(url.indexOf("/api/users") == 0 && uuidv4.validate(url.split('/')[url.split('/').length - 1])) return true;
+    if(url.indexOf("/api/users") == 0 && uuid.validate(url.split('/')[url.split('/').length - 1])) return true;
     return false
 }
 
-const checkPutOrDelete = (url: string) => {
-    if(uuidv4.validate(url.split('/')[url.split('/').length - 1])) return true;
+const checkPutOrDelete = (url: string): Boolean => {
+    if(uuid.validate(url.split('/')[url.split('/').length - 1])) return true;
     return false
 }
 
-const checkPOST = (url: string) => {
+const checkPOST = (url: string): Boolean => {
     if(url === "/api/users" || url === "/api/users/") return true;
     return false;
 }
