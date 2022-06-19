@@ -24,7 +24,7 @@ const validators = [
     {operation: "POST", check: checkPOST}
 ]
 
-const validateInput = (url: string, method: string): Object[] => {
+const validateInput = (url: string): Object[] => {
     return validators.filter((item) => {
     if(item.operation === url) return !item.check(url);
     return true;
@@ -32,5 +32,6 @@ const validateInput = (url: string, method: string): Object[] => {
 
 export const validation = (req: http.IncomingMessage, res: http.ServerResponse): (string | undefined) => {
     if(req.url!.indexOf('/api/users') != 0) return undefined;
-    if(validateInput.length == 0) return req.method;
+    if(validateInput(req.url!).length == 0) return req.method;
+    else return '';
 }
